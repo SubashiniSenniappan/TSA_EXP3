@@ -11,33 +11,37 @@ type to fit the data.
 4. Store the results in an array
 5. Represent the result in graphical representation as given below.
 ### PROGRAM:
-import matplotlib.pyplot as plt
-
+```
+import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+df = pd.read_csv('/mnt/data/weather_classification_data.csv')
+data = df['Temperature'].values
+mean = np.mean(data)
+variance = np.var(data)
+normalized_data = (data - mean) / np.sqrt(variance)
+def compute_autocorrelation(data, lag):
+    n = len(data)
+    autocorr = np.correlate(data, data, mode='full')
+    autocorr = autocorr[n-1:] / (variance * n)
+    return autocorr[:lag]
 
-data = [3, 16, 156, 47, 246, 176, 233, 140, 130,
-101, 166, 201, 200, 116, 118, 247,
-209, 52, 153, 232, 128, 27, 192, 168, 208,
-187, 228, 86, 30, 151, 18, 254,
-76, 112, 67, 244, 179, 150, 89, 49, 83, 147, 90,
-33, 6, 158, 80, 35, 186, 127]
+lag = 40  # You can change this to the desired number of lags
+autocorr_results = compute_autocorrelation(normalized_data, lag)
+plt.figure(figsize=(10, 6))
+plt.stem(range(lag), autocorr_results, use_line_collection=True)
+plt.title('Autocorrelation Function (ACF)')
+plt.xlabel('Lag')
+plt.ylabel('Autocorrelation')
+plt.grid(True)
+plt.show()
 
-lags = range(35)
+```
 
-
-#Pre-allocate autocorrelation table
-
-#Mean
-
-#Variance
-
-#Normalized data
-
-#Go through lag components one-by-one
-
-#display the graph
 
 ### OUTPUT:
+
+![Screenshot 2024-09-03 203810](https://github.com/user-attachments/assets/61b9d59c-7e79-4888-84f0-5aa37dcc9f4f)
 
 ### RESULT:
         Thus we have successfully implemented the auto correlation function in python.
