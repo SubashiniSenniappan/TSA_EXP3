@@ -27,7 +27,7 @@ def compute_autocorrelation(data, lag):
     autocorr = autocorr[n-1:] / (variance * n)
     return autocorr[:lag]
 
-lag = 40  # You can change this to the desired number of lags
+lag = 35  # You can change this to the desired number of lags
 autocorr_results = compute_autocorrelation(normalized_data, lag)
 plt.figure(figsize=(10, 6))
 plt.stem(range(lag), autocorr_results, use_line_collection=True)
@@ -42,7 +42,8 @@ plt.show()
 
 ### OUTPUT:
 
-![Screenshot 2024-09-03 203810](https://github.com/user-attachments/assets/61b9d59c-7e79-4888-84f0-5aa37dcc9f4f)
+![Screenshot 2024-09-11 091307](https://github.com/user-attachments/assets/fa92bf12-70bc-48c9-8e0f-822f98fca9b9)
+
 
 ### RESULT:
         Thus we have successfully implemented the auto correlation function in python.
